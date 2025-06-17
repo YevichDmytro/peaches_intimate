@@ -1,0 +1,33 @@
+.page {
+  height: 100%;
+  width: 100%;
+
+  background-color: lightblue;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  max-width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menuItem {
+  cursor: pointer;
+  text-decoration: none;
+  color: orange;
+
+  &:hover {
+    color: darkblue;
+  }
+
+  a {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
