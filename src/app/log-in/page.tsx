@@ -1,14 +1,28 @@
+'use client';
+
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../lib/firebase/config';
 import style from './page.module.scss';
 
-import React from 'react';
-
 const LoginPage = () => {
+  const handleGoogleAuth = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      const user = result.user;
+      console.log('Login successfully!', user);
+    } catch (error) {
+      console.log('Error! Login was failed:', error);
+    }
+  };
+
   return (
     <div className='page'>
       <h1>Log In</h1>
 
       <div className={style.buttonsMenu}>
-        <button>Log in with Google</button>
+        <button onClick={handleGoogleAuth}>Log in with Google</button>
         <button>Log in with Apple</button>
         <button>Log in with LinkedIn</button>
         <button>Log in with GitHub</button>
