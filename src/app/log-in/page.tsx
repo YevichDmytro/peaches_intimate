@@ -1,16 +1,27 @@
 'use client';
 
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../lib/firebase/config';
-import style from './page.module.scss';
+import { auth } from '@/lib/firebase/config';
+import SocialLoginButtons from '@/app/log-in/components/SocialLoginButtons';
+import LoginForm from '@/app/log-in/components/LoginForm';
+import style from '@/app/log-in/page.module.scss';
+import { useState } from 'react';
+import UserModal from './components/UserModal/UserModal';
 
 const LoginPage = () => {
+  const [isLogin, setLogin] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
+
   const handleGoogleAuth = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
       const user = result.user;
+
+      setUserData(user);
+      setLogin(true);
+
       console.log('Login successfully!', user);
     } catch (error) {
       console.log('Error! Login was failed:', error);
@@ -18,45 +29,26 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='page'>
-      <h1>Log In</h1>
+    <div className={style.loginPage}>
+      <div className={style.leftSide}>Swiper</div>
+      <div className={style.rightSide}>
+        <h1>Log In</h1>
 
-      <div className={style.buttonsMenu}>
-        <button onClick={handleGoogleAuth}>Log in with Google</button>
-        <button>Log in with Apple</button>
-        <button>Log in with LinkedIn</button>
-        <button>Log in with GitHub</button>
+        <div className={style.buttonsMenu}>
+          <SocialLoginButtons
+            onClick={handleGoogleAuth}
+            alt='Google login Icon'
+            icon='/svg/google-icon.svg'
+          >
+            Log in with Google
+          </SocialLoginButtons>
+        </div>
+
+        <p>Or</p>
+
+        <LoginForm />
       </div>
-
-      <p>Or</p>
-
-      <form action=''>
-        <label htmlFor='email'>
-          <input
-            type='text'
-            id='email'
-            placeholder='Enter your email'
-            required
-          />
-        </label>
-
-        <label htmlFor='password'>
-          <input
-            type='password'
-            id='password'
-            placeholder='Enter your password'
-            required
-          />
-        </label>
-
-        <button>Forgot password?</button>
-
-        <label htmlFor='remember-me'>
-          <input type='checkbox' id='remember-me' name='remember-me' />
-        </label>
-
-        <button type='submit'>Log In</button>
-      </form>
+      {isLogin && <UserModal setLogin={setLogin} userData={userData} />}
     </div>
   );
 };
