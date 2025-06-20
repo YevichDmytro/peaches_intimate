@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import style from './UserModal.module.scss';
+import { User } from 'firebase/auth';
 
 interface UserModalProps {
   setLogin: (value: boolean) => void;
-  userData: any;
+  userData: User;
 }
 
 const UserModal: FC<UserModalProps> = ({ setLogin, userData }) => {
