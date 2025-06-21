@@ -8,22 +8,57 @@
   border-radius: 22px;
 }
 
+.leftSide {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+
+  background-image: url('/login-page-swiper-img.png');
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 84px;
+  font-weight: 700;
+  line-height: 42px;
+  color: #fff;
+
+  padding-top: 24%;
+}
+
 .rightSide {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+
   width: 50%;
   height: 100%;
 }
 
-.leftSide {
+.rightSideContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 50%;
+
+  width: 100%;
   height: 100%;
+  max-width: 400px;
+  max-height: 640px;
+}
+
+.rightSideTitle {
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 42px;
+  text-align: center;
+  color: #1b1d1f;
+
+  margin-bottom: 52px;
 }
 
 .buttonsMenu {
@@ -35,16 +70,24 @@
   gap: 24px;
 }
 
+.paragraph {
+  margin: 24px 0;
+}
+
+// ----- media queries for responsiveness -----
+
+@media (max-width: 475px) {
+  .leftSide {
+    display: none;
+  }
+}
+
 @media (max-width: 390px) {
   .rightSide {
     width: 100%;
     height: auto;
     gap: 24px;
     padding: 12px;
-  }
-
-  .leftSide {
-    display: none;
   }
 
   .buttonsMenu {

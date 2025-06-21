@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 import { auth } from '@/lib/firebase/config';
-import SocialLoginButtons from '@/app/log-in/components/SocialLoginButtons';
-import LoginForm from '@/app/log-in/components/LoginForm';
-import style from '@/app/log-in/page.module.scss';
+import SocialLoginButtons from './components/SocialLoginButtons/SocialLoginButtons';
+import LoginForm from './components/LoginForm/LoginForm';
 import UserModal from './components/UserModal/UserModal';
+import style from './page.module.scss';
 
 const LoginPage = () => {
   const [isLogin, setLogin] = useState<boolean>(false);
@@ -32,23 +32,30 @@ const LoginPage = () => {
     <div className={style.loginPage}>
       {!isLogin && (
         <>
-          <div className={style.leftSide}>Swiper</div>
+          <div className={style.leftSide}>
+            <h1 className={style.title}>Peaches</h1>
+          </div>
+
           <div className={style.rightSide}>
-            <h1>Log In</h1>
+            <div className={style.rightSideContent}>
+              <h1 className={style.rightSideTitle}>Log In</h1>
 
-            <div className={style.buttonsMenu}>
-              <SocialLoginButtons
-                onClick={handleGoogleAuth}
-                alt='Google login Icon'
-                icon='/svg/google-icon.svg'
-              >
-                Log in with Google
-              </SocialLoginButtons>
+              <div className={style.buttonsMenu}>
+                <SocialLoginButtons
+                  onClick={handleGoogleAuth}
+                  alt='Google login Icon'
+                  icon='/svg/google-icon.svg'
+                >
+                  Log in with Google
+                </SocialLoginButtons>
+              </div>
+
+              <p className={style.paragraph}>Or</p>
+
+              <div>
+                <LoginForm />
+              </div>
             </div>
-
-            <p>Or</p>
-
-            <LoginForm />
           </div>
         </>
       )}

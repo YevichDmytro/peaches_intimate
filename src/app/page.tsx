@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import styles from '@/app/page.module.scss';
+import styles from './page.module.scss';
 
 const Page = () => {
   const router = useRouter();

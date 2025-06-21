@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Image from 'next/image';
-import style from '@/app/log-in/components/SocialLoginButtons.module.scss';
+import style from './SocialLoginButtons.module.scss';
 
 interface SocialLoginButtonsProps {
   children: ReactNode;

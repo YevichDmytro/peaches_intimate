@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import style from './UserModal.module.scss';
 import { User } from 'firebase/auth';
+import style from './UserModal.module.scss';
 
 interface UserModalProps {
   setLogin: (value: boolean) => void;
