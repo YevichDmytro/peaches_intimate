@@ -24,7 +24,7 @@ const useGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     try {
       if (isMobile) {
-        await signInWithRedirect(auth, provider);
+        signInWithRedirect(auth, provider);
       } else {
         const result = await signInWithPopup(auth, provider);
         setUser(result.user);
