@@ -3,15 +3,15 @@ import { User } from 'firebase/auth';
 import style from './UserModal.module.scss';
 
 interface UserModalProps {
-  setLogin: (value: boolean) => void;
   userData: User;
+  setModalOpen: (state: boolean) => void;
 }
 
-const UserModal: FC<UserModalProps> = ({ setLogin, userData }) => {
+const UserModal: FC<UserModalProps> = ({ userData, setModalOpen }) => {
   const { email, displayName } = userData;
 
   const onClose = () => {
-    setLogin(false);
+    setModalOpen(false);
     window.location.reload();
   };
 

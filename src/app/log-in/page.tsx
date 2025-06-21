@@ -1,36 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase/config';
 import SocialLoginButtons from './components/SocialLoginButtons/SocialLoginButtons';
 import LoginForm from './components/LoginForm/LoginForm';
 import UserModal from './components/UserModal/UserModal';
+import useGoogleLogin from '@/hooks/useGoogleLogin';
+import { useState } from 'react';
 import style from './page.module.scss';
 
 const LoginPage = () => {
-  const [isLogin, setLogin] = useState<boolean>(false);
-  const [userData, setUserData] = useState<User | null>(null);
+  const [isModalOpen, setModalOpen] = useState(true);
 
-  const handleGoogleAuth = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-
-      const user = result.user;
-
-      setLogin(true);
-      setUserData(user);
-
-      console.log('Login successfully!', user);
-    } catch (error) {
-      console.log('Error! Login was failed:', error);
-    }
-  };
+  const { user, login, loading } = useGoogleLogin();
 
   return (
     <div className={style.loginPage}>
-      {!isLogin && (
+      {!user && (
         <>
           <div className={style.leftSide}>
             <h1 className={style.title}>Peaches</h1>
@@ -42,7 +26,8 @@ const LoginPage = () => {
 
               <div className={style.buttonsMenu}>
                 <SocialLoginButtons
-                  onClick={handleGoogleAuth}
+                  onClick={login}
+                  disabled={loading}
                   alt='Google login Icon'
                   icon='/svg/google-icon.svg'
                 >
@@ -60,7 +45,9 @@ const LoginPage = () => {
         </>
       )}
 
-      {userData && <UserModal setLogin={setLogin} userData={userData!} />}
+      {user && isModalOpen && (
+        <UserModal userData={user!} setModalOpen={setModalOpen} />
+      )}
     </div>
   );
 };
